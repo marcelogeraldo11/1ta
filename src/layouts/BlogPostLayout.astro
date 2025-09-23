@@ -106,22 +106,12 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
 							)
 						}
 					</div>
-					<div
-						class="prose prose-neutral prose-lg md:prose-xl dark:prose-invert prose-img:rounded-xl prose-figure:text-center prose-img:mx-auto"
-					>
+					<div class="prose prose-lg prose-gray dark:prose-invert max-w-none prose-headings:font-semibold prose-headings:text-gray-900 dark:prose-headings:text-gray-100 prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-8 prose-p:text-lg prose-li:text-lg prose-li:leading-8 prose-li:text-gray-700 dark:prose-li:text-gray-300 prose-a:text-primary dark:prose-a:text-primary-dark prose-strong:text-gray-900 dark:prose-strong:text-gray-100">
 						<slot />
 					</div>
 
-					<!-- Suggest edit -->
+					<!-- Suggest edit removed -->
 					<div class="flex justify-between mt-16 gap-4 flex-wrap italic">
-						<a
-							href={`https://github.com/yashjawale/yashjawale.github.io/edit/main/src/content/blog/${slug}.md`}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="hover:underline underline-offset-4 opacity-70 hover:opacity-100"
-							><Icon name="mdi:pencil-outline" class="inline-block" />
-							Suggest an edit
-						</a>
 						<p class="opacity-70">
 							Last modified: {lastModified}
 						</p>

@@ -7,12 +7,12 @@ import icon from 'astro-icon'
 import rehypeFigureTitle from 'rehype-figure-title'
 import { rehypeAccessibleEmojis } from 'rehype-accessible-emojis'
 import { remarkReadingTime } from './src/plugins/remark-reading-time.mjs'
-import { remarkModifiedTime } from './src/plugins/remark-modified-time.mjs'
+import remarkModifiedTime from './src/plugins/remark-modified-time.mjs'
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://yashjawale.github.io',
-	base: '/saral-theme-astro',
+	site: 'http://localhost:5174',
+	base: '/',
 	integrations: [
 		mdx(),
 		sitemap(),
@@ -25,6 +25,9 @@ export default defineConfig({
 	],
 	vite: {
 		plugins: [tailwindcss()],
+	},
+	server: {
+		port: 5174,
 	},
 	markdown: {
 		remarkPlugins: [remarkReadingTime, remarkModifiedTime],

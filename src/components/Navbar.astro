@@ -3,22 +3,27 @@ import NavbarLink from './NavbarLink.astro'
 import { Icon } from 'astro-icon/components'
 import ThemeSelector from './ThemeSelector.astro'
 import { SITE_BASE, WebsiteLinks } from '../consts'
-import LogoSVG from '../assets/logo.svg'
 ---
 
 <header class="fixed top-0 w-full z-40 bg-background dark:bg-background-dark">
 	<nav class="">
 		<div class="app-container flex justify-between items-center py-5">
-			<a href=`${SITE_BASE}/` aria-label="Home">
-				<LogoSVG height={36} width={36} />
+			<a
+				href={`${SITE_BASE}/`}
+				aria-label="Inicio"
+				class="font-semibold text-xl tracking-wide"
+			>
+				<span>1TA</span>
 			</a>
 			<div class="gap-8 hidden md:flex items-center">
 				{
 					WebsiteLinks.map((link) => (
 						<NavbarLink
 							class="text-lg"
-							href={`${SITE_BASE}/${link.url}`}
-							target={link.url.charAt(0) === 'h' ? '_blank' : '_self'}
+							href={
+								link.url === '/' ? `${SITE_BASE}/` : link.url.startsWith('http') ? link.url : `${SITE_BASE}/${link.url}`
+							}
+							target={link.url.startsWith('http') ? '_blank' : '_self'}
 						>
 							{link.name}
 						</NavbarLink>
@@ -29,8 +34,8 @@ import LogoSVG from '../assets/logo.svg'
 			<button
 				class="md:hidden cursor-pointer"
 				id="nav-open-btn"
-				aria-label="Open navigation menu"
-				title="Open navigation menu"
+				aria-label="Abrir menú de navegación"
+				title="Abrir menú de navegación"
 			>
 				<Icon aria-hidden name="mdi:menu" size={32} />
 			</button>
@@ -43,20 +48,32 @@ import LogoSVG from '../assets/logo.svg'
 				<button
 					id="nav-close-btn"
 					class="ml-auto block cursor-pointer"
-					aria-label="Close navigation menu"
-					title="Close navigation menu"
+					aria-label="Cerrar menú de navegación"
+					title="Cerrar menú de navegación"
 				>
 					<Icon aria-hidden name="mdi:close" size={32} />
 				</button>
-				<div class="flex flex-col h-full items-start gap-8 pt-16">
+
+				<div class="flex flex-col items-start mt-6">
 					{
 						WebsiteLinks.map((link) => (
-							<NavbarLink class="text-4xl font-light" href={link.url}>
+							<NavbarLink
+								class="text-lg"
+								href={
+									link.url === '/'
+										? `${SITE_BASE}/`
+										: link.url.startsWith('http') ? link.url : `${SITE_BASE}/${link.url}`
+								}
+								target={link.url.startsWith('http') ? '_blank' : '_self'}
+							>
 								{link.name}
 							</NavbarLink>
 						))
 					}
-					<ThemeSelector class:list="mt-4" />
+
+					<div class="py-4">
+						<ThemeSelector />
+					</div>
 				</div>
 			</div>
 		</div>
