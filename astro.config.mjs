@@ -11,11 +11,21 @@ import remarkModifiedTime from './src/plugins/remark-modified-time.mjs'
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'http://localhost:5174',
+	site: process.env.SITE_URL || 'http://localhost:5174',
 	base: '/',
 	integrations: [
 		mdx(),
-		sitemap(),
+		sitemap({
+			// Excluir rutas no deseadas del sitemap
+			filter: (page) => {
+				try {
+					const p = typeof page === 'string' ? page : String(page)
+					return !p.includes('/404') && !p.endsWith('/rss.xml')
+				} catch {
+					return true
+				}
+			},
+		}),
 		icon(),
 		partytown({
 			config: {
